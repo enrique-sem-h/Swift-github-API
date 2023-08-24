@@ -12,7 +12,6 @@ struct ContentView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.login, order: .reverse)]) var GHuser: FetchedResults<GHUser>
     
     @State private var user: GitHubUser?
-//    @State private var user: GitHubUser? = GitHubUser(login: "enrique-sem-h", avatarUrl: "https://avatars.githubusercontent.com/u/111439330?v=4", bio: nil)
     @State private var username: String = ""
     @State private var isShowing = false
     
