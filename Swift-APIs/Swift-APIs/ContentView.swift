@@ -6,14 +6,19 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.login, order: .reverse)]) var GHuser: FetchedResults<GHUser>
+    @StateObject private var vm: GHUserViewModel
     
-    @State private var user: GitHubUser?
+    init(vm: GHUserViewModel) {
+        _vm = StateObject(wrappedValue: vm)
+    }
+    
+    @State private var user: GitHubUser? = nil
     @State private var username: String = ""
     @State private var isShowing = false
+    let container = CKContainer(identifier: "iCloud.SwiftUI.API.Learning")
     
     var body: some View { // the main view
         VStack { /// the whole view
@@ -40,7 +45,7 @@ struct ContentView: View {
                 }.buttonStyle(.borderedProminent)
                 Button {
                     if user != nil{
-                        DataController().addUser(login: user!.login, avatarUrl: user!.avatarUrl, bio: user?.bio ?? "bio not found 😔", context: managedObjectContext)
+                        vm.saveUser(login: user!.login, avatarUrl: user!.avatarUrl, bio: user?.bio ?? "bio not found 😔")
                         print("User saved")
                     } else {
                         print("user nil")
@@ -79,7 +84,7 @@ struct ContentView: View {
             } label: {
                 Image(systemName: "square.and.arrow.up")
             }.sheet(isPresented: $isShowing) {
-                UsersView(user: $user)
+                UsersView(mainViewUser: $user)
             }
             Spacer()
         }
@@ -123,7 +128,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(vm: GHUserViewModel(container: CKContainer.default()))
     }
 }
 

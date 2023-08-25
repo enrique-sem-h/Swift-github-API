@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3137F80F2A97D4FF00F13BE6 /* GHUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3137F80E2A97D4FF00F13BE6 /* GHUserViewModel.swift */; };
 		315ADA312A8FDB9300B1A111 /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315ADA302A8FDB9300B1A111 /* Struct.swift */; };
 		315ADA352A8FDBC800B1A111 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315ADA342A8FDBC800B1A111 /* ErrorHandler.swift */; };
-		315ADA382A8FE2B400B1A111 /* GHUserModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 315ADA362A8FE2B400B1A111 /* GHUserModel.xcdatamodeld */; };
-		315ADA3B2A8FE35200B1A111 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315ADA3A2A8FE35200B1A111 /* DataController.swift */; };
 		315ADA3D2A8FE69600B1A111 /* UsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315ADA3C2A8FE69600B1A111 /* UsersView.swift */; };
 		318FA4B52A8E9EFC00BD9063 /* Swift_APIsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FA4B42A8E9EFC00BD9063 /* Swift_APIsApp.swift */; };
 		318FA4B72A8E9EFC00BD9063 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FA4B62A8E9EFC00BD9063 /* ContentView.swift */; };
@@ -19,10 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3137F80D2A97C8EA00F13BE6 /* Swift-APIs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Swift-APIs.entitlements"; sourceTree = "<group>"; };
+		3137F80E2A97D4FF00F13BE6 /* GHUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHUserViewModel.swift; sourceTree = "<group>"; };
 		315ADA302A8FDB9300B1A111 /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
 		315ADA342A8FDBC800B1A111 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
-		315ADA372A8FE2B400B1A111 /* GHUser.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GHUser.xcdatamodel; sourceTree = "<group>"; };
-		315ADA3A2A8FE35200B1A111 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		315ADA3C2A8FE69600B1A111 /* UsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersView.swift; sourceTree = "<group>"; };
 		318FA4B12A8E9EFC00BD9063 /* Swift-APIs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift-APIs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		318FA4B42A8E9EFC00BD9063 /* Swift_APIsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_APIsApp.swift; sourceTree = "<group>"; };
@@ -42,22 +41,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		315ADA2F2A8FDB8600B1A111 /* Helpers */ = {
+		3137F8102A97DD2D00F13BE6 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3137F80E2A97D4FF00F13BE6 /* GHUserViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		315ADA2F2A8FDB8600B1A111 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				315ADA302A8FDB9300B1A111 /* Struct.swift */,
 				315ADA342A8FDBC800B1A111 /* ErrorHandler.swift */,
 			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		315ADA392A8FE2BB00B1A111 /* DataModel */ = {
-			isa = PBXGroup;
-			children = (
-				315ADA362A8FE2B400B1A111 /* GHUserModel.xcdatamodeld */,
-				315ADA3A2A8FE35200B1A111 /* DataController.swift */,
-			);
-			path = DataModel;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		318FA4A82A8E9EFC00BD9063 = {
@@ -79,11 +77,12 @@
 		318FA4B32A8E9EFC00BD9063 /* Swift-APIs */ = {
 			isa = PBXGroup;
 			children = (
+				3137F80D2A97C8EA00F13BE6 /* Swift-APIs.entitlements */,
 				318FA4B42A8E9EFC00BD9063 /* Swift_APIsApp.swift */,
 				318FA4B62A8E9EFC00BD9063 /* ContentView.swift */,
 				315ADA3C2A8FE69600B1A111 /* UsersView.swift */,
-				315ADA2F2A8FDB8600B1A111 /* Helpers */,
-				315ADA392A8FE2BB00B1A111 /* DataModel */,
+				3137F8102A97DD2D00F13BE6 /* ViewModels */,
+				315ADA2F2A8FDB8600B1A111 /* Models */,
 				318FA4B82A8E9EFD00BD9063 /* Assets.xcassets */,
 				318FA4BA2A8E9EFD00BD9063 /* Preview Content */,
 			);
@@ -169,9 +168,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				315ADA312A8FDB9300B1A111 /* Struct.swift in Sources */,
-				315ADA3B2A8FE35200B1A111 /* DataController.swift in Sources */,
-				315ADA382A8FE2B400B1A111 /* GHUserModel.xcdatamodeld in Sources */,
 				315ADA352A8FDBC800B1A111 /* ErrorHandler.swift in Sources */,
+				3137F80F2A97D4FF00F13BE6 /* GHUserViewModel.swift in Sources */,
 				318FA4B72A8E9EFC00BD9063 /* ContentView.swift in Sources */,
 				315ADA3D2A8FE69600B1A111 /* UsersView.swift in Sources */,
 				318FA4B52A8E9EFC00BD9063 /* Swift_APIsApp.swift in Sources */,
@@ -300,6 +298,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Swift-APIs/Swift-APIs.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift-APIs/Preview Content\"";
@@ -329,6 +328,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Swift-APIs/Swift-APIs.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift-APIs/Preview Content\"";
@@ -375,19 +375,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		315ADA362A8FE2B400B1A111 /* GHUserModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				315ADA372A8FE2B400B1A111 /* GHUser.xcdatamodel */,
-			);
-			currentVersion = 315ADA372A8FE2B400B1A111 /* GHUser.xcdatamodel */;
-			path = GHUserModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 318FA4A92A8E9EFC00BD9063 /* Project object */;
 }

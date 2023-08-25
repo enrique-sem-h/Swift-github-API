@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import CloudKit
 
 @main
 struct Swift_APIsApp: App {
-    @StateObject private var dataControler = DataController()
+
+    let container = CKContainer(identifier: "iCloud.SwiftUI.API.Learning")
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, dataControler.container.viewContext)
+            ContentView(vm: GHUserViewModel(container: container))
         }
     }
 }
