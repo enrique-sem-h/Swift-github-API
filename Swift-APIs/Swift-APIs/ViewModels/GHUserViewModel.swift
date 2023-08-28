@@ -24,7 +24,7 @@ class GHUserViewModel: ObservableObject{
     func saveUser(login: String, avatarUrl: String, bio: String?){
         
         let record = CKRecord(recordType: "Struct")
-        let ghUser = GitHubUser(login: login, avatarUrl: avatarUrl, bio: bio)
+        let ghUser = GitHubUser(record: record,login: login, avatarUrl: avatarUrl, bio: bio)
         record.setValuesForKeys(ghUser.toDict())
         
         // saving to database
@@ -51,8 +51,7 @@ class GHUserViewModel: ObservableObject{
             switch returnedResult{
             case .success(let record):
                 if let ghUser = GitHubUser.translate(record){
-                    print(ghUser)
-                    returnedUsers.append(ghUser)
+                    returnedUsers.append(GitHubUser(record: record, login: ghUser.login, avatarUrl: ghUser.avatarUrl, bio: ghUser.bio))
                 }
                 break
             case .failure(let error):
@@ -73,7 +72,19 @@ class GHUserViewModel: ObservableObject{
     func addOp(operation: CKDatabaseOperation){
         CKContainer(identifier: "iCloud.SwiftUI.API.Learning").privateCloudDatabase.add(operation)
     }
-    
+ 
+    func del(indexSet: IndexSet){
+        guard let index = indexSet.first else { return }
+        
+        let user = users[index]
+        let record = user.record
+        
+        CKContainer(identifier: "iCloud.SwiftUI.API.Learning").privateCloudDatabase.delete(withRecordID: record!.recordID) { [weak self] returnedRecordID, returnedError in
+            DispatchQueue.main.async {
+                self?.users.remove(at: index)
+            }
+        }
+    }
 }
     
     

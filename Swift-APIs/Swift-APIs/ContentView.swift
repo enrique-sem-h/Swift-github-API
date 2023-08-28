@@ -15,7 +15,7 @@ struct ContentView: View {
         _vm = StateObject(wrappedValue: vm)
     }
     
-    @State private var user: GitHubUser? = nil
+    @State private var user: GitHubUserLocal? = nil
     @State private var username: String = ""
     @State private var isShowing = false
     let container = CKContainer(identifier: "iCloud.SwiftUI.API.Learning")
@@ -107,7 +107,7 @@ struct ContentView: View {
         }
     }
     
-    func getUser() async throws -> GitHubUser{ // returns a decoded user
+    func getUser() async throws -> GitHubUserLocal{ // returns a decoded user
         let endpoint = "https://api.github.com/users/\(username)"
         
         guard let url = URL(string: endpoint) else { throw GHError.invalidURL }
@@ -119,7 +119,7 @@ struct ContentView: View {
     do{
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return try decoder.decode(GitHubUser.self, from: data)
+        return try decoder.decode(GitHubUserLocal.self, from: data)
     } catch {
         throw GHError.invalidData
     }

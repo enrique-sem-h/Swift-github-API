@@ -12,7 +12,7 @@ struct UsersView: View {
     @Environment(\.dismiss) var dismiss
     
     @StateObject private var vm = GHUserViewModel(container: CKContainer.default())
-    @Binding var mainViewUser: GitHubUser?
+    @Binding var mainViewUser: GitHubUserLocal?
 
 //    init(vm: GHUserViewModel) {
 //        _vm = StateObject(wrappedValue: vm)
@@ -42,10 +42,10 @@ struct UsersView: View {
                                 .fontWeight(.light)
                         }
                     }.onTapGesture {
-                        mainViewUser = GitHubUser(login: user.login, avatarUrl: user.avatarUrl, bio: user.bio)
+                        mainViewUser = GitHubUserLocal(login: user.login, avatarUrl: user.avatarUrl, bio: user.bio)
                         dismiss()
                     }
-                }
+                }.onDelete(perform: vm.del)
             }
         }.onAppear{
             vm.fetchItems()

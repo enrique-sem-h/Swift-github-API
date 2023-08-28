@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3137F80F2A97D4FF00F13BE6 /* GHUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3137F80E2A97D4FF00F13BE6 /* GHUserViewModel.swift */; };
+		3137F8122A9A259F00F13BE6 /* GitHubUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3137F8112A9A259F00F13BE6 /* GitHubUser.swift */; };
 		315ADA312A8FDB9300B1A111 /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315ADA302A8FDB9300B1A111 /* Struct.swift */; };
 		315ADA352A8FDBC800B1A111 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315ADA342A8FDBC800B1A111 /* ErrorHandler.swift */; };
 		315ADA3D2A8FE69600B1A111 /* UsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315ADA3C2A8FE69600B1A111 /* UsersView.swift */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		3137F80D2A97C8EA00F13BE6 /* Swift-APIs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Swift-APIs.entitlements"; sourceTree = "<group>"; };
 		3137F80E2A97D4FF00F13BE6 /* GHUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHUserViewModel.swift; sourceTree = "<group>"; };
+		3137F8112A9A259F00F13BE6 /* GitHubUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUser.swift; sourceTree = "<group>"; };
 		315ADA302A8FDB9300B1A111 /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
 		315ADA342A8FDBC800B1A111 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		315ADA3C2A8FE69600B1A111 /* UsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersView.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				315ADA302A8FDB9300B1A111 /* Struct.swift */,
+				3137F8112A9A259F00F13BE6 /* GitHubUser.swift */,
 				315ADA342A8FDBC800B1A111 /* ErrorHandler.swift */,
 			);
 			path = Models;
@@ -167,6 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3137F8122A9A259F00F13BE6 /* GitHubUser.swift in Sources */,
 				315ADA312A8FDB9300B1A111 /* Struct.swift in Sources */,
 				315ADA352A8FDBC800B1A111 /* ErrorHandler.swift in Sources */,
 				3137F80F2A97D4FF00F13BE6 /* GHUserViewModel.swift in Sources */,
