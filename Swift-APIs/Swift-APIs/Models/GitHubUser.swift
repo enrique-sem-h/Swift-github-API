@@ -22,6 +22,9 @@ struct GitHubUser: Hashable{
     }
     
     func toDict() -> [String : Any]{
+        guard let bio = bio else {
+            return ["login" : login, "avatarUrl" : avatarUrl]
+        }
         return ["login" : login, "avatarUrl" : avatarUrl, "bio" : bio]
     }
     

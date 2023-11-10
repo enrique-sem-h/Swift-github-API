@@ -20,32 +20,38 @@ struct UsersView: View {
 
     var body: some View {
         VStack{
-            List{
-                ForEach(vm.users, id: \.self){ user in
-                    HStack {
-                        AsyncImage(url: URL(string: user.avatarUrl)) { img in // user's image with placeholder in case of nil
-                            img
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(Circle())
-                        } placeholder: {
-                            Circle()
-                                .foregroundColor(.secondary)
-                            
-                        }.frame(width: 80)
-                            .padding()
-                        VStack {
-                            Text(user.login)
-                                .bold()
-                            Text(user.bio!)
-                                .lineLimit(1)
-                                .fontWeight(.light)
+            if vm.users.isEmpty{
+                ProgressView()
+            } else {
+                List{
+                    ForEach(vm.users, id: \.self){ user in
+                        HStack {
+                            AsyncImage(url: URL(string: user.avatarUrl)) { img in // user's image with placeholder in case of nil
+                                img
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .clipShape(Circle())
+                            } placeholder: {
+                                Circle()
+                                    .foregroundColor(.secondary)
+                                
+                            }.frame(width: 80)
+                                .padding()
+                            VStack {
+                                Text(user.login)
+                                    .bold()
+                                Text(user.bio!)
+                                    .lineLimit(1)
+                                    .fontWeight(.light)
+                            }
+                        }.onTapGesture {
+                            mainViewUser = GitHubUserLocal(login: user.login, avatarUrl: user.avatarUrl, bio: user.bio)
+                            dismiss()
                         }
-                    }.onTapGesture {
-                        mainViewUser = GitHubUserLocal(login: user.login, avatarUrl: user.avatarUrl, bio: user.bio)
-                        dismiss()
-                    }
-                }.onDelete(perform: vm.del)
+                    }.onDelete(perform: vm.del)
+                }.refreshable {
+                    vm.fetchItems()
+                }
             }
         }.onAppear{
             vm.fetchItems()

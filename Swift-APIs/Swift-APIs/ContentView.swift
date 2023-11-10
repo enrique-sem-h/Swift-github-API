@@ -13,6 +13,8 @@ struct ContentView: View {
     
     init(vm: GHUserViewModel) {
         _vm = StateObject(wrappedValue: vm)
+        vm.requestNotificationPermissions()
+        vm.subscribeToNotifications()
     }
     
     @State private var user: GitHubUserLocal? = nil

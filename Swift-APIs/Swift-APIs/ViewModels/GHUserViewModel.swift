@@ -6,13 +6,16 @@
 //
 
 import Foundation
+import SwiftUI
 import CloudKit
+import UserNotifications
 
 class GHUserViewModel: ObservableObject{
     
     private var database: CKDatabase
     private var container: CKContainer
     
+    @Published var isDoneFetching = false
     @Published var users: [GitHubUser] = []
     
     init(container: CKContainer) {
@@ -39,10 +42,10 @@ class GHUserViewModel: ObservableObject{
         }
     }
  
-    func fetchItems(){
+    func fetchItems() {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Struct", predicate: predicate)
-        query.sortDescriptors = [NSSortDescriptor(key: "login", ascending: false)]
+        query.sortDescriptors = [NSSortDescriptor(key: "login", ascending: true)]
         let queryOp = CKQueryOperation(query: query)
         
         var returnedUsers: [GitHubUser] = []
@@ -62,6 +65,7 @@ class GHUserViewModel: ObservableObject{
         queryOp.queryResultBlock = { [weak self] returnedResult in
             DispatchQueue.main.async {
                 self?.users = returnedUsers
+                self?.isDoneFetching = true
             }
         }
         
@@ -85,56 +89,47 @@ class GHUserViewModel: ObservableObject{
             }
         }
     }
+    
+    func requestNotificationPermissions(){
+        let options: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: options) { success, error in
+            if let error = error{
+                print(error.localizedDescription)
+            } else if success{
+                print("Success!")
+                
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                
+            } else {
+                print("There was an error with the authorization request")
+            }
+        }
+    }
+    
+    func subscribeToNotifications(){
+//        let options = CKQuerySubscription.Options()
+//        options.
+        
+        let subscription = CKQuerySubscription(recordType: "Struct", predicate: NSPredicate(value: true), subscriptionID: "user-added-to-DB", options: .firesOnRecordCreation)
+        subscription.zoneID = .default
+        
+        let notification = CKSubscription.NotificationInfo()
+        notification.title = "A new user was added to your database"
+        notification.alertBody = "Open the app to check more details"
+        notification.soundName = "default"
+        notification.shouldBadge = true
+        
+        subscription.notificationInfo = notification
+        
+        self.database.save(subscription) { returnedRecord, returnedError in
+            if let error = returnedError{
+                print(error)
+            } else {
+                print("succesfully subscribed to user notifications")
+            }
+        }
+        
+    }
 }
-    
-    
-//    func fetch(){
-//
-//        var users: [GitHubUser] = []
-//
-//        let query = CKQuery(recordType: "Struct", predicate: NSPredicate(value: true))
-//
-//        database.fetch(withQuery: query) { result in
-//            switch result{
-//            case .success(let result):
-//                result.matchResults.compactMap { $0.1 }
-//                    .forEach{
-//                    switch $0 {
-//                    case .success(let record):
-//                        if let ghUser = GitHubUser.translate(record) {
-//                            users.append(ghUser)
-//                        }
-//                    case .failure(let error):
-//                        print(error)
-//                    }
-//                }
-//
-//                DispatchQueue.main.async {
-//                    self.users = users.map(userViewModel.init)
-//                }
-//
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
-//
-//}
-//
-//struct userViewModel{
-//
-//    let ghUser: GitHubUser
-//
-//    var login: String {
-//        ghUser.login
-//    }
-//
-//    var avatarUrl: String{
-//        ghUser.avatarUrl
-//    }
-//
-//    var bio: String{
-//        ghUser.bio ?? "bio not found 😔"
-//    }
-//
-//}
